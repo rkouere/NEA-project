@@ -1,0 +1,124 @@
+Microsoft Windows [Version 10.0.18363.1139]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+(ffs) D:\NEA project>cd API
+
+(ffs) D:\NEA project\API>cd mysite
+
+(ffs) D:\NEA project\API\mysite>python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+October 30, 2020 - 13:24:08
+Django version 3.0.7, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[30/Oct/2020 13:24:13] "GET / HTTP/1.1" 200 16351
+
+(ffs) D:\NEA project\API\mysite>python manage.py startapp api
+
+---------------------------------------
+
+(ffs) D:\NEA project>cd API
+
+(ffs) D:\NEA project\API>cd mysite
+
+(ffs) D:\NEA project\API\mysite>manage.py
+
+(ffs) D:\NEA project\API\mysite>dir
+ Volume in drive D is DATA
+ Volume Serial Number is A448-20AB
+
+ Directory of D:\NEA project\API\mysite
+
+30/10/2020  14:25    <DIR>          .
+30/10/2020  14:25    <DIR>          ..
+30/10/2020  13:26    <DIR>          api
+30/10/2020  13:17                 0 db.sqlite3
+30/10/2020  14:25               648 manage.py
+30/10/2020  13:17    <DIR>          mysite
+               2 File(s)            648 bytes
+               4 Dir(s)  15,205,679,104 bytes free
+
+(ffs) D:\NEA project\API\mysite>dir
+ Volume in drive D is DATA
+ Volume Serial Number is A448-20AB
+
+ Directory of D:\NEA project\API\mysite
+
+30/10/2020  14:25    <DIR>          .
+30/10/2020  14:25    <DIR>          ..
+30/10/2020  13:26    <DIR>          api
+30/10/2020  13:17                 0 db.sqlite3
+30/10/2020  14:25               648 manage.py
+30/10/2020  13:17    <DIR>          mysite
+               2 File(s)            648 bytes
+               4 Dir(s)  15,205,679,104 bytes free
+
+
+(ffs) D:\NEA project\API\mysite\mysite>cd /
+
+(ffs) D:\>cd NEA project
+
+(ffs) D:\NEA project>cd API
+
+(ffs) D:\NEA project\API>cd mysite
+
+(ffs) D:\NEA project\API\mysite>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying sessions.0001_initial... OK
+
+(ffs) D:\NEA project\API\mysite>
+
+---------------------------------------
+
+(ffs) D:\NEA project\API\mysite>cd api
+
+(ffs) D:\NEA project\API\mysite\api>models.py
+
+(ffs) D:\NEA project\API\mysite\api>cd
+D:\NEA project\API\mysite\api
+
+(ffs) D:\NEA project\API\mysite\api>cd /
+
+(ffs) D:\>cd NEA project/API
+
+(ffs) D:\NEA project\API>/mysite
+'/mysite' is not recognized as an internal or external command,
+operable program or batch file.
+
+(ffs) D:\NEA project\API>cd mysite
+
+(ffs) D:\NEA project\API\mysite>py manage.py makemigrations
+Migrations for 'api':
+  api\migrations\0001_initial.py
+    - Create model Birds
+
+(ffs) D:\NEA project\API\mysite>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessions
+Running migrations:
+  Applying api.0001_initial... OK
+

@@ -1,0 +1,9 @@
+table of birds
+table of neural networks
+table of results
+
+
+what app does:
+how to do HTTP request
+
+how to update an interface when a new image is inputed

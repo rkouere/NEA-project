@@ -1,0 +1,18 @@
+Convolution:
+tends to be the first layer
+
+its purpose is to locate the presence of a set of features in the images received as input
+
+it "drags" a window representing the feature onto the image, and it calculates the product of convolution between the feature and each portion of the scanned image
+
+A feature is then seen as a filter
+
+It has an input of multiple images and calculates the convolution of all of them with each filter, the filters correspond exactly to the features that we wish to find in the images
+
+we obtain a feature map which indicates where the features are in the image, the higher the value the more corresponding places in the image looks like the feature.
+
+Pooling:
+consists of reducing the size of images whilst preserving their important characteristics.
+
+We cut the image in regular cells and we keep the maximum value in each cell. We usuall use small square cells to not loose too much information. The most common choices are adjecent cells of size 2x2 pixels which do not overlap, or cells of size 3 × 3 pixels, separated from each other by a step of 2 pixels (which therefore overlap).
+This helps with preventing overfitting

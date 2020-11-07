@@ -1,0 +1,12 @@
+Make andoid app
+ its what the people will see --> important
+
+it must do:
+capable of taking a photo
+capable of uploading a file
+capable of sending HTTP requests 
+	as jsons
+
+web server that does rest (server)  
+treats a POST request with an image
+Returns result of that treatment, might also send average or something
