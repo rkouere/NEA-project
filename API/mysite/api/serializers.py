@@ -10,16 +10,12 @@ class BirdSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ResultsSerializer(serializers.HyperlinkedModelSerializer):
-    # network_id = serializers.HyperlinkedIdentityField(view_name="api.networks")
-
     class Meta:
         model = Results
         fields = ('id', 'network_id', 'result')
 
 
 class NetworkSerializer(serializers.HyperlinkedModelSerializer):
-    # url = serializers.HyperlinkedIdentityField(view_name="api:networks-detail")
-
     class Meta:
         model = Networks
         fields = ('id', 'name', 'algorithm')

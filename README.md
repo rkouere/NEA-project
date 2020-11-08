@@ -7,6 +7,10 @@ pip3 install django-cors-headers
 
 pip3 install django-rest-multiple-models
 
-python manage.py migrate
+pip3 install djangorestframework
 
-python manage.py createsuperuser
+python3 manage.py migrate
+
+python3 manage.py createsuperuser
+
+python3 manage.py runserver
