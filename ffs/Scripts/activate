@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\NEA project\ffs"
+VIRTUAL_ENV="D:\NEA-project\ffs"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

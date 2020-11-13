@@ -1,4 +1,6 @@
 from django.db import models
+# from PIL import save, Image
+from keras_preprocessing import image
 
 
 class Bird(models.Model):
@@ -25,3 +27,5 @@ class Results(models.Model):
 
     def __float__(self):
         return self.result
+
+
