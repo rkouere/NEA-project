@@ -15,7 +15,7 @@ VGG_16 = ""
 
 def load_networks():
     global ROSA6, VGG_16
-    ROSA6 = keras.models.load_model("D:/NEA-project/Networks/R.O.S.A - 6")
+    ROSA6 = keras.models.load_model("../../Networks/R.O.S.A - 6")
 
     # load the pre built network, VGG-16:
     VGG_16 = VGG16()
@@ -47,10 +47,10 @@ class UploadedImage:
 
     def __init__(self, data, data_type):
         if data_type == "jpg":
-            self.path = "D:/NEA-project/API/mysite/temp-images/tmp.jpg"
+            self.path = "../../API/mysite/temp-images/tmp.jpg"
             print("jpg")
         elif data_type == "png":
-            self.path = "D:/NEA-project/API/mysite/temp-images/tmp.png"
+            self.path = "../../API/mysite/temp-images/tmp.png"
             print("png")
         self.img = data
         self.datatype = data_type
@@ -89,13 +89,13 @@ class UploadedImage:
     def predict(self):
         return predict_ROSA(self.ROSA_image), predict_VGG(self.VGG_image)
 
-
-starter = open("D:/NEA-project/API/mysite/predict startup.txt", "r+")
-contents = starter.read()
-if contents == "0":
-    ROSA6 = ""
-    VGG_16 = ""
-    starter.truncate()
-    load_networks()
-elif contents == "1":
-    pass
+load_networks()
+# starter = open("D:/NEA-project/API/mysite/predict startup.txt", "r+")
+# contents = starter.read()
+# if contents == "0":
+#     ROSA6 = ""
+#     VGG_16 = ""
+#     starter.truncate()
+#     load_networks()
+# elif contents == "1":
+#     pass
