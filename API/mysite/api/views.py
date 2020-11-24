@@ -8,13 +8,14 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 import os
 from time import sleep
-from .predict import UploadedImage
+from .predict import UploadedImage, get_database_data
 
 
 # ModelViewSet will handle GET and POST
 class BirdViewSet(viewsets.ModelViewSet):
     queryset = Bird.objects.all().order_by('name')
     serializer_class = BirdSerializer
+    print(get_database_data())
 
 
 class ResultsViewSet(viewsets.ModelViewSet):
@@ -25,11 +26,6 @@ class ResultsViewSet(viewsets.ModelViewSet):
 class NetworksViewSet(viewsets.ModelViewSet):
     queryset = Networks.objects.all().order_by('name')
     serializer_class = NetworkSerializer
-
-
-'''
-    Class to upload an image.
-'''
 
 
 class UploadViewSet(ViewSet):
@@ -50,23 +46,20 @@ class UploadViewSet(ViewSet):
         use its path to then make it a keras Image object. """
 
         if file_type == "image/jpeg":
-            print("asdf")
             img = UploadedImage(file_content, "jpg")
-            # I would use img.main(), but for some reason it saves the image twice
             img.convert()
+            process_bool = True
         elif file_type == "image/png":
             img = UploadedImage(file_content, "png")
             img.convert()
+            process_bool = True
         else:
             print("unsupported data type")
+            process_bool = False
 
-        # save the result in the result model
-
-        # send a OK response with the results
-
-        response = "POST API and you have uploaded a {} file, the file has been processed".format(file_type) + "  "+str(img.predict())
+        if process_bool:
+            response = "POST API and you have uploaded a {} file, the file has been processed".format(file_type) + "  "+ str(img.predict())
+        else:
+            response = "no file processed" + str(img.predict())
 
         return Response(response)
-
-
-# load_network()

@@ -51,8 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    # 'drf_multiple_model'
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'

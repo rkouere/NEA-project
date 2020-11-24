@@ -1,5 +1,3 @@
-from abc import ABC
-
 from rest_framework import serializers
 from .models import Bird, Networks, Results
 from rest_framework.serializers import Serializer, FileField
