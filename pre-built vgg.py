@@ -42,9 +42,8 @@ def test_network():
 
     # Afficher les 3 classes les plus probables
     counter = 0
-    x = decode_predictions(y, top=1)[0][0][1]
+    x = decode_predictions(y, top=3)
     return x
 
 
 print(test_network())
-print("asdfasdf")

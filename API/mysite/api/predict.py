@@ -10,20 +10,25 @@ from keras.applications.vgg16 import decode_predictions
 import json
 import urllib.request
 from keras.preprocessing.image import load_img, img_to_array
+import base64
+
 
 ROSA6 = ""
 VGG_16 = ""
+bird_array = []
 
 
+# Loads both of the neural networks
 def load_networks():
     global ROSA6, VGG_16
-    # load my neural network
+    # load my neural network through a directory
     ROSA6 = keras.models.load_model("../../Networks/R.O.S.A - 6")
 
     # load the pre built network, VGG-16:
     VGG_16 = VGG16()
 
 
+# Predicts what the image is through my neural network and returns a boolean
 def predict_ROSA(data):
     global ROSA6, VGG_16
 
@@ -36,53 +41,44 @@ def predict_ROSA(data):
             if result[0][i] < temp_val:
                 temp_val = result[0][i]
     if temp_val > 0.01:
-        x = True
-    return temp_val, x
+        return True
+    else:
+        return False
 
 
+# Predicts what the image is through VGG-16 and returns a boolean
 def predict_VGG(data):
     # predict the value using ".predict"
     raw_predictions = VGG_16.predict(data)
 
     # only using ".predict" will give unreadable data, the function "decode_predictions" is needed to decode the data
     decoded_prediction = decode_predictions(raw_predictions, top=1)[0][0][1]
+
     return decoded_prediction
 
 
-def get_database_data():
-    bird_array = []
-
-    with urllib.request.urlopen("http://127.0.0.1:8000/bird") as url:
-        data = json.loads(url.read().decode())
-
-    for i in data:
-        list1 = i.values()
-        list_list = list(list1)
-        bird_array.append(list_list[1])
-    return bird_array
-
-
+# This object is what the image is, its main purpose is to convert a jpg image into a Keras image object
 class UploadedImage:
 
-    def __init__(self, data, data_type):
+    def __init__(self, data):
         # make different methods for jpg and png, if errors would occur
-        if data_type == "jpg":
-            self.path = "../../API/mysite/temp-images/tmp.jpg"
-            print("jpg")
-        elif data_type == "png":
-            self.path = "../../API/mysite/temp-images/tmp.png"
-            print("png")
+        # if data_type == "jpg":
+        self.path = "../../API/mysite/temp-images/temp.jpg"
+        # elif data_type == "png":
+        #     self.path = "../../API/mysite/temp-images/tmp.png"
         self.img = data
-        self.datatype = data_type
+        # self.datatype = data_type
 
         # Separate images needed because ROSA6 and VGG-16 work with different target sizes
         self.ROSA_image = ""
         self.VGG_image = ""
 
-    def save_image(self):
+    def save_image(self, data):
+        filename = self.path
+        with open(filename, 'wb') as f:
+            f.write(data)
+
         # save the image into a directory so that I can make it into a keras object
-        path = default_storage.save(self.path, self.img)
-        tmp_file = os.path.join(settings.MEDIA_ROOT, path)
 
     def keras(self):
         # loads the temporary image file I created
@@ -92,10 +88,12 @@ class UploadedImage:
 
     def delete(self):
         # deletes the temporary image file to avoid having overlapping files
-        os.remove(self.path)
+        # os.remove(self.path)
+        pass
 
     def convert(self):
-        self.save_image()
+        imageData = base64.b64decode(self.img)
+        self.save_image(imageData)
         self.keras()
         self.delete()
         # print(self.ROSA_image, self.VGG_image)

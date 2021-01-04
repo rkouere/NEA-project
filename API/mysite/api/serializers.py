@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models import Bird, Networks, Results
-from rest_framework.serializers import Serializer, FileField
+from .models import Bird, Network, Results
+from rest_framework.serializers import Serializer, FileField, IntegerField, CharField
 
 
+# Serializers handle the "translating" of django models (databases) into other formats which we can use
 class BirdSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bird
@@ -17,12 +18,14 @@ class ResultsSerializer(serializers.HyperlinkedModelSerializer):
 
 class NetworkSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Networks
-        fields = ('id', 'name', 'algorithm')
+        model = Network
+        fields = ('id', 'name')
 
 
 class UploadSerializer(Serializer):
-    file_uploaded = FileField()
+    # Create all the fields for the uploading of an image
+    file_uploaded = CharField()
+    result = IntegerField()
 
     class Meta:
-        fields = ['file_uploaded']
+        fields = ['file_uploaded', 'result']
