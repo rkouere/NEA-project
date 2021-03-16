@@ -1,9 +1,9 @@
 from rest_framework import serializers
 from .models import Bird, Network, Results
-from rest_framework.serializers import Serializer, FileField, IntegerField, CharField
+from rest_framework.serializers import Serializer, IntegerField, CharField
 
 
-# Serializers handle the "translating" of django models (databases) into other formats which we can use
+# Serializers handle the "translating" of django models (aka. databases) into other formats which can be used
 class BirdSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Bird

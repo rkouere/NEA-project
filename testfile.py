@@ -1,4 +1,4 @@
-'''import keras
+import keras
 from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 import tensorflow as tf
@@ -97,7 +97,7 @@ def testnetwork():
 
 
 testnetwork()
-'''
+
 
 for i in range(12):
     print(i)

@@ -12,7 +12,6 @@ import urllib.request
 from keras.preprocessing.image import load_img, img_to_array
 import base64
 
-
 ROSA6 = ""
 VGG_16 = ""
 bird_array = []
@@ -20,6 +19,11 @@ bird_array = []
 
 # Loads both of the neural networks
 def load_networks():
+    '''
+    banane
+    Returns:
+
+    '''
     global ROSA6, VGG_16
     # load my neural network through a directory
     ROSA6 = keras.models.load_model("../../Networks/R.O.S.A - 6")
@@ -61,42 +65,45 @@ def predict_VGG(data):
 class UploadedImage:
 
     def __init__(self, data):
-        # make different methods for jpg and png, if errors would occur
-        # if data_type == "jpg":
+        """
+        Args:
+            data: contains the base 64 string which represents the uploaded image
+        """
         self.path = "../../API/mysite/temp-images/temp.jpg"
-        # elif data_type == "png":
-        #     self.path = "../../API/mysite/temp-images/tmp.png"
         self.img = data
-        # self.datatype = data_type
 
         # Separate images needed because ROSA6 and VGG-16 work with different target sizes
         self.ROSA_image = ""
         self.VGG_image = ""
 
     def save_image(self, data):
+        """
+        saves the image into a directory so that I can make it into a keras object
+
+        Args:
+            data: contains the converted image file
+        """
+
         filename = self.path
         with open(filename, 'wb') as f:
             f.write(data)
 
-        # save the image into a directory so that I can make it into a keras object
-
     def keras(self):
-        # loads the temporary image file I created
+        # loads the temporary image file I created into keras objects to be processed
         self.ROSA_image = image.load_img(self.path, target_size=(64, 64))
         self.VGG_image = image.load_img(self.path, target_size=(224, 224))
         self.convert_to_array()
 
     def delete(self):
         # deletes the temporary image file to avoid having overlapping files
-        # os.remove(self.path)
-        pass
+        os.remove(self.path)
 
     def convert(self):
+        # Converts the base 64 string into an image
         imageData = base64.b64decode(self.img)
         self.save_image(imageData)
         self.keras()
         self.delete()
-        # print(self.ROSA_image, self.VGG_image)
 
     def convert_to_array(self):
         # keras processes images that are in array form, so I need to convert them to arrays
@@ -106,7 +113,7 @@ class UploadedImage:
         self.VGG_image = image.img_to_array(self.VGG_image)
         self.VGG_image = self.VGG_image.reshape(
             (1, self.VGG_image.shape[0], self.VGG_image.shape[1], self.VGG_image.shape[2]))
-        self.VGG_image = preprocess_input(self.VGG_image)  # Pre-treats the image like VGG_16 likes
+        self.VGG_image = preprocess_input(self.VGG_image)  # Pre-treats the image in the form that VGG_16 accepts
 
     def predict(self):
         return predict_ROSA(self.ROSA_image), predict_VGG(self.VGG_image)

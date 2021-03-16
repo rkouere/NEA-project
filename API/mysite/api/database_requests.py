@@ -20,8 +20,8 @@ def get_accuracy_rate(name):
     correct = c.fetchall()
     c.execute(total_query.format(str(network_id)))
     total = c.fetchall()
-    print(correct[0][0], total[0][0])
-    return str(name.format("", ":")), str(((correct[0][0] / total[0][0]) * 100))  # str(correct/total)
+    # print(correct[0][0], total[0][0])
+    return str(name.format("", ":")), str(round(((correct[0][0] / total[0][0]) * 100), 1))  # str(correct/total)
 
 
 # Adds a result to the ROSA6 fields in results database

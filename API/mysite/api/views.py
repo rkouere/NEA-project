@@ -15,7 +15,6 @@ from .predict import UploadedImage
 from .database_requests import get_accuracy_rate, rosa_add_result, vgg_add_result
 
 
-
 # ModelViewSet will handle GET and POST
 class BirdViewSet(viewsets.ModelViewSet):
     queryset = Bird.objects.all()
@@ -49,30 +48,16 @@ class UploadViewSet(ViewSet):
             result = True
         else:
             result = None
-        # file_type = file_uploaded.content_type
-        # file_content = ContentFile(file_uploaded.read())
 
-        """ My neural network can only accepts keras Image objects, and I cant manage to 
-        find a way to convert the file_uploaded into a PIL image. One way to do this is to use a downloaded image and 
-        use its path to then make it a keras Image object. """
-
-        # Makes sure the code doesn't break if a file type it cannot process gets processed
-        # if file_type == "image/jpeg":
-        #     img = UploadedImage(file_content, "jpg")
-        #     img.convert()
-        #     process_bool = True
-        # elif file_type == "image/png":
-        #     img = UploadedImage(file_content, "png")
-        #     img.convert()
-        #     process_bool = True
-        # else:
-        #     print("unsupported data type", file_type)
-        #     process_bool = False
+        """ 
+        Keras can only accept keras Image objects, I was unsuccessful in finding a way to convert string_uploaded 
+        into a keras object without using a file directory. So to create a keras object, the base 64 string first must 
+        get converted into an image object, save that image into a directory and then load that image as a keras object.
+        """
 
         img = UploadedImage(string_uploaded)
         img.convert()
 
-        # Only carries on if the file type is correct
         rosa_prediction, vgg_prediction = img.predict()
         res = True
         try:
@@ -90,8 +75,6 @@ class UploadViewSet(ViewSet):
             vgg_add_result(1)
         else:
             vgg_add_result(0)
-        # print(Response(response))
-        # print(string_uploaded, result)
         return Response(response)
 
 
@@ -100,4 +83,5 @@ class GetAccuracyRate(ViewSet):
 
     def list(self, request):
         response = get_accuracy_rate('{}ROSA6{}') + get_accuracy_rate('{}VGG-16{}')
+        print(response)
         return Response(response)

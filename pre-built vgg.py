@@ -20,7 +20,7 @@ print('Top 3 :', decode_predictions(y, top=3)[0])
 def test_network():
     basePath = "D:/NEA project/images/testing images/"
     baseName = "BD"
-    img = load_img("D:/NEA-project/martine.JPG", target_size=(224, 224))  # Charger l'image
+    img = load_img("D:/NEA-project/mimi.JPG", target_size=(224, 224))  # Charger l'image
     img = img_to_array(img)  # Convertir en tableau numpy
     img = img.reshape(
         (1, img.shape[0], img.shape[1], img.shape[2]))  # Créer la collection d'images (un seul échantillon)
@@ -41,9 +41,13 @@ def test_network():
     y = model.predict(img)  # Prédir la classe de l'image (parmi les 1000 classes d'ImageNet)
 
     # Afficher les 3 classes les plus probables
-    counter = 0
+    decoded_array = []
     x = decode_predictions(y, top=3)
-    return x
+    for i in x[0]:
+        print(i[1])
+        decoded_array.append(i[1])
+
+    return decoded_array
 
 
 print(test_network())
